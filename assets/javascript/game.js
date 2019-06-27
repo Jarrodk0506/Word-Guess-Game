@@ -1,3 +1,5 @@
+$(document).ready(function(){
+
 var answer = [             // The guessable word array
     "this",
     "is",
@@ -20,7 +22,7 @@ var gameEnd = false;
 
 
 
-currentWord = answer[Math.floor(Math.random() * answer.length)].toUpperCase(); // Picks the current word from the array
+currentWord = answer[Math.floor(Math.random() * answer.length)].toUpperCase(); // Picks the first random word from the array
 triesLeft = tries;
 
 for (var i=0; i < currentWord.length; i++){     // This for loop takes the picked word and replaces it with "_" 
@@ -60,6 +62,7 @@ document.onkeyup = function(event) {
           }
                if(guessingWord.join("") === currentWord){
                     wins++
+                    reset();
                }
      }
 
@@ -86,7 +89,27 @@ guessedLetters.textContent = (event.key).toUpperCase();  // displays the key pre
      winsDisplay = document.getElementById("wins").innerText = wins; // Update wins 
 };
 
+function reset(){
+     currentWord = answer[Math.floor(Math.random() * answer.length)].toUpperCase(); 
+     console.log(currentWord);     //select a random word
+
+     for (var i=0; i < currentWord.length; i++){     // This for loop takes the picked word and replaces it with "_" 
+     guessingWord.push("_");
+     
+}
+
+     triesLeft = tries;  // reset tries left
+
+     lettersGuessed = [];     // reset arrays
+     guessingWord = [];
+
+     triesDisplay = document.getElementById("lives").innerText = triesLeft; // Displays remaining tries.
+     wordDisplay = document.getElementById("guess").innerText = guessingWord.join(" ");   // Update guessing word _ with correct letter
+     winsDisplay = document.getElementById("wins").innerText = wins; // Update wins 
+
+
+}
 
 
 
-
+});
