@@ -37,3 +37,11 @@ for (var d = 0; d < 1; d++){
      $("#guess").append(newP); 
 }
 
+var guessedLetters = document.getElementById("letters");
+document.onkeyup = function(event) {
+  guessedLetters.textContent = event.key;
+};
+
+// $("#letters").keyup(function(event) {
+//      console.log(event.key);
+//    });
