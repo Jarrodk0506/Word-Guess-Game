@@ -19,6 +19,7 @@ var correct = false;
 var gameEnd = false;   
 
 
+
 currentWord = answer[Math.floor(Math.random() * answer.length)]; // Picks the current word from the array
     
 for (var i=0; i < currentWord.length; i++){     // This for loop takes the picked word and replaces it with "_" 
@@ -29,12 +30,10 @@ console.log(guessingWord);
 
 var targetDiv = document.getElementById("guess");
 
-for (var d = 0; d < answer.length; d++){
-    var newDiv = document.createElement("p")
-     newDiv.innerHTML = guessingWord[i];
-     targetDiv.appendChild(newDiv);
+for (var d = 0; d < 1; d++){
+     var newP = $("<p>");  
+     var x = guessingWord.toString();             
+     newP.text(guessingWord);            
+     $("#guess").append(newP); 
 }
-
-
-
 
