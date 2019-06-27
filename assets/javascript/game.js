@@ -9,7 +9,7 @@ var answer = [             // The guessable word array
 
 
 var tries = 10;         // How many lives the player has
-
+var triesLeft;
 var lettersGuessed = [];    // The array that stores the letters guessed.
 var currentWord;
 var guessingWord = [];  // The array that holds the correct letters guessed.
@@ -21,7 +21,8 @@ var gameEnd = false;
 
 
 currentWord = answer[Math.floor(Math.random() * answer.length)].toUpperCase(); // Picks the current word from the array
-    
+triesLeft = tries;
+
 for (var i=0; i < currentWord.length; i++){     // This for loop takes the picked word and replaces it with "_" 
     guessingWord.push("_");
 }
@@ -31,38 +32,61 @@ console.log(guessingWord);
 
 
 
-for (var d = 0; d < 1; d++){
-     var newH = $("<h1>");  
-     var x = guessingWord.toString();             
-     newH.text(x);            
-     $("#guess").append(newH); 
-}
 
 
 
 var guessedLetters = document.getElementById("letters");
 document.onkeyup = function(event) {
-guessedLetters.textContent = event.key;  // displays the key pressed
-lettersGuessed.push(event.key);
+          checkLetter(event.key.toUpperCase())
+     }
+
+     var lives = document.getElementById("lives").innerText = triesLeft; //Display "10" tries left
+     var triesDisplay = lives;
+
+     var word = document.getElementById("guess").innerText = guessingWord.join(" "); //Display The current word being guessed
+     var wordDisplay = word;
+
+     var winCount = document.getElementById("wins").innerText = wins; //Display wins
+
+     function checkLetter(letter){
+          var correctLetter = false;    //Function Checking if the letter is correct.
+     
+    
+
+     for (var i=0; i < currentWord.length; i++){
+          if (letter === currentWord[i]){             // if the letter is correct  
+               guessingWord[i] = letter;
+               correctLetter = true;
+          }
+               if(guessingWord.join("") === currentWord){
+                    wins++
+               }
+     }
+
+     if (!correctLetter){
+          if(!lettersGuessed.includes(letter)){        // if the letter is incorrect check if its in the guessed
+               lettersGuessed.push(letter);           // letters array. if it is not add it and display it.
+               triesLeft--;
+          }
+          if(triesLeft === 0) {
+               guessingWord = currentWord.split();  // Display correct word if you run out of tries.
+          }
+     }
+
+
+guessedLetters.textContent = (event.key).toUpperCase();  // displays the key pressed
   var newH = $("<h1>");
   var x = lettersGuessed.toString();
-  newH.text(x);
+  var y = x.toUpperCase();
+  newH.text(y);
   $("#letters").append(newH);
+
+     triesDisplay = document.getElementById("lives").innerText = triesLeft; // Displays remaining tries.
+     wordDisplay = document.getElementById("guess").innerText = guessingWord.join(" ");   // Update guessing word _ with correct letter
+     winsDisplay = document.getElementById("wins").innerText = wins; // Update wins 
 };
 
 
 
-var lives = document.getElementById("lives");
-    for(var l = 0; l < 1; l++){
-         var newH = $("<h1>");
-         newH.text("Lives left =" + tries);
-          $("#lives").append(newH);
-    }
 
-var score = document.getElementById("wins");
-    for(var l = 0; l < 1; l++){
-         var newH = $("<h1>");
-         newH.text("Wins = " + wins);
-          $("#wins").append(newH);
-    }
 
