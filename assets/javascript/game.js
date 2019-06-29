@@ -43,6 +43,7 @@ console.log(guessingWord);
 
 document.onkeyup = function(event) {
           checkLetter(event.key.toUpperCase())
+
      }
 
      var lives = document.getElementById("lives").innerText = triesLeft; //Display "10" tries left
@@ -140,8 +141,8 @@ function restart(){
      guessedLettersDisplay = document.getElementById("letters").innerText = lettersGuessed.join(" ");
 }
 
-function letterCheck(ch){
-
+function letterCheck(){
+/^([a-z0-9]{5,})$/.test('abc1'); 
 }
 
 
